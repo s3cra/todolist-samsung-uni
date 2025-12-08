@@ -13,7 +13,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,14 +24,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.module3todo.domain.model.TodoItem
 import com.example.module3todo.navigation.Details
+import com.example.module3todo.presentation.viewmodel.TodoViewModel
 
 @Composable
 fun TodoCard(todoItem: TodoItem, navController: NavHostController, modifier: Modifier = Modifier){
     Card(modifier = Modifier.clickable { navController.navigate(Details(todoItem.id)) }
         .then(modifier)) {
 
+        val checked = remember { mutableStateOf(todoItem.isCompleted) }
         Row(modifier = Modifier.padding(16.dp).height(50.dp)) {
-            Checkbox(todoItem.isCompleted, onCheckedChange = {})
+            Checkbox(checked = checked.value, onCheckedChange = {
+                checked.value = it
+                todoItem.isCompleted = it
+            }, modifier = Modifier.testTag("check"))
 
             Column(Modifier.fillMaxHeight(), verticalArrangement = Arrangement.Center){
                 Text(todoItem.title, fontWeight = FontWeight.Bold)
@@ -39,17 +47,3 @@ fun TodoCard(todoItem: TodoItem, navController: NavHostController, modifier: Mod
     }
 }
 
-@Composable
-@Preview(showSystemUi = true)
-fun TodoCardPreview(){
-    TodoCard(
-        TodoItem(
-            id = 0,
-            title = "Title",
-            description = "Description",
-            isCompleted = false
-        ),
-        rememberNavController(),
-        Modifier.fillMaxWidth().systemBarsPadding()
-    )
-}

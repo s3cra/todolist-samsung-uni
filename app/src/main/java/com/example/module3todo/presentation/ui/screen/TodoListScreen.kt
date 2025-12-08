@@ -9,6 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavHostController
 import com.example.module3todo.navigation.Details
 import com.example.module3todo.presentation.ui.component.TodoCard
@@ -27,7 +28,7 @@ fun TodoListScreen(
             items(todos.value){ item ->
                 TodoCard(item, navController, Modifier.fillMaxWidth().clickable{
                     navController.navigate(Details(item.id))
-                })
+                }.testTag("todoCard"))
             }
         }
     }

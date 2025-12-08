@@ -33,6 +33,12 @@ class TodoViewModel(private val getTodosUseCase: GetTodosUseCase) : ViewModel() 
         }
     }
 
+    fun togleTodo(id: Int){
+        items.value.find { it.id == id }?.let {
+            it.isCompleted = !it.isCompleted
+        }
+    }
+
 
 }
 

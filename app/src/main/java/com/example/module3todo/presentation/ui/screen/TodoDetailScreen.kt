@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavHostController
 import com.example.module3todo.domain.model.TodoItem
 import com.example.module3todo.presentation.viewmodel.TodoViewModel
@@ -28,7 +29,7 @@ fun TodoDetailScreen(
 
     Scaffold {
         Column {
-            IconButton(onClick = { navController.popBackStack() }, Modifier.padding(it)) {
+            IconButton(onClick = { navController.popBackStack() }, Modifier.padding(it).testTag("back")) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
             }
             Text(todo.title)

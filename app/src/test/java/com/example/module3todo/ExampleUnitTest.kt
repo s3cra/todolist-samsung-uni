@@ -2,6 +2,7 @@ package com.example.module3todo
 
 import android.content.Context
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.module3todo.data.local.TodoJsonDataSource
 import com.example.module3todo.data.model.TodoItemDto
 import com.example.module3todo.data.repository.TodoRepositoryImpl
@@ -31,5 +32,10 @@ class ExampleUnitTest {
             }
             assertEquals(3, todos.await().size)
         }
+    }
+
+    @Test
+    fun toggleToggles(){
+
     }
 }
