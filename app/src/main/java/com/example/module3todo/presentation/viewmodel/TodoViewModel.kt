@@ -52,12 +52,12 @@ class TodoViewModel(private val getTodosUseCase: GetTodosUseCase,
 }
 
 class TodoViewModelFactory(
-    private val context: Context
+    private val repo: TodoRepositoryImpl
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return TodoViewModel(
-            GetTodosUseCase(TodoRepositoryImpl(TodoJsonDataSource(context))),
-            ToggleTodoUseCase(TodoRepositoryImpl(TodoJsonDataSource(context)))
+            GetTodosUseCase(repo),
+            ToggleTodoUseCase(repo)
         ) as T
     }
 }

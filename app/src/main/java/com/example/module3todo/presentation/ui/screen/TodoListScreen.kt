@@ -27,7 +27,6 @@ fun TodoListScreen(
     Scaffold {
         LazyColumn(modifier = Modifier.padding(it)) {
             items(todos.value){ item ->
-                Log.d("RRR",item.id.toString())
                 TodoCard(item, {viewModel.toggleTodo(item.id)}, Modifier.fillMaxWidth().clickable{
                     navController.navigate(Details(item.id))
                 }.testTag("todoCard"))

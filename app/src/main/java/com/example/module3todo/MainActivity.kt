@@ -27,7 +27,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             Module3TodoTheme {
                 val controller = rememberNavController()
-                val viewModel: TodoViewModel = viewModel(factory = TodoViewModelFactory(this))
+                val repo = TodoRepositoryImpl(TodoJsonDataSource(this))
+                val viewModel: TodoViewModel = viewModel(factory = TodoViewModelFactory(repo))
 
                 NavHost(navController = controller, startDestination = TodoList){
                     composable<TodoList>{

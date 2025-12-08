@@ -2,7 +2,6 @@ package com.example.module3todo.data.repository
 
 import android.util.Log
 import com.example.module3todo.data.local.ITodoJsonDataSource
-import com.example.module3todo.data.local.TodoJsonDataSource
 import com.example.module3todo.domain.model.TodoItem
 import com.example.module3todo.domain.repository.TodoRepository
 
@@ -12,7 +11,7 @@ class TodoRepositoryImpl(
 
     private var cache: MutableList<TodoItem> = mutableListOf()
 
-    override suspend fun getTodos(): List<TodoItem> {
+    override fun getTodos(): List<TodoItem> {
         if (cache.isEmpty()) {
             cache = source.getTodos().map { todoItemDto ->
                 TodoItem(
@@ -23,12 +22,10 @@ class TodoRepositoryImpl(
                 )
             }.toMutableList()
         }
-        cache = mutableListOf(TodoItem(200,"ddfg","dfg",false))
         return cache
     }
 
-    override suspend fun toggleTodo(id: Int) {
-        Log.e("id", id.toString())
+    override fun toggleTodo(id: Int) {
         val i = cache.indexOfFirst { it.id == id }
 
         cache[i].isCompleted = !cache[i].isCompleted
