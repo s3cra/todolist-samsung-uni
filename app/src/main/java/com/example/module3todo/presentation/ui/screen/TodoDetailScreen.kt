@@ -24,7 +24,7 @@ fun TodoDetailScreen(
     viewModel: TodoViewModel
 ) {
 
-    val todos = viewModel.items.collectAsState()
+    val todos = viewModel.items
     val todo = todos.value.find { it.id == todoID } ?: return
 
     Scaffold {

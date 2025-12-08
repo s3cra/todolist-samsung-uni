@@ -27,15 +27,12 @@ import com.example.module3todo.navigation.Details
 import com.example.module3todo.presentation.viewmodel.TodoViewModel
 
 @Composable
-fun TodoCard(todoItem: TodoItem, navController: NavHostController, modifier: Modifier = Modifier){
-    Card(modifier = Modifier.clickable { navController.navigate(Details(todoItem.id)) }
-        .then(modifier)) {
+fun TodoCard(todoItem: TodoItem, onCheck: () -> Unit, modifier: Modifier = Modifier){
+    Card(modifier = Modifier.then(modifier)) {
 
-        val checked = remember { mutableStateOf(todoItem.isCompleted) }
         Row(modifier = Modifier.padding(16.dp).height(50.dp)) {
-            Checkbox(checked = checked.value, onCheckedChange = {
-                checked.value = it
-                todoItem.isCompleted = it
+            Checkbox(checked = todoItem.isCompleted, onCheckedChange = {
+                onCheck()
             }, modifier = Modifier.testTag("check"))
 
             Column(Modifier.fillMaxHeight(), verticalArrangement = Arrangement.Center){

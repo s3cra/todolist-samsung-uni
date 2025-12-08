@@ -1,5 +1,6 @@
 package com.example.module3todo.presentation.ui.screen
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,12 +22,13 @@ fun TodoListScreen(
     viewModel: TodoViewModel
 ) {
 
-    val todos = viewModel.items.collectAsState()
+    val todos = viewModel.items
 
     Scaffold {
         LazyColumn(modifier = Modifier.padding(it)) {
             items(todos.value){ item ->
-                TodoCard(item, navController, Modifier.fillMaxWidth().clickable{
+                Log.d("RRR",item.id.toString())
+                TodoCard(item, {viewModel.toggleTodo(item.id)}, Modifier.fillMaxWidth().clickable{
                     navController.navigate(Details(item.id))
                 }.testTag("todoCard"))
             }
