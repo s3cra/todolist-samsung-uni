@@ -2,8 +2,8 @@ package com.example.module3todo.domain.usecase
 
 import com.example.module3todo.domain.repository.TodoRepository
 
-class ToggleTodoUseCase(private val repository: TodoRepository) {
+class DeleteTodoUseCase(private val repository: TodoRepository) {
     suspend operator fun invoke(id: Int) {
-        repository.toggleTodo(id)
+        repository.deleteTodo(id)
     }
 }
